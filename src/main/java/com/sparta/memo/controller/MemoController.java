@@ -43,4 +43,28 @@ public class MemoController {
 
         return responseList;
     }
+    //수정 기능
+    @PutMapping("/memos/{id}")
+    public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto){
+        //해당 메모가 DB에 존재하는지 확인
+        if(memoList.containsKey(id)){
+            Memo memo = memoList.get(id);
+            //memo수정하기
+            memo.update(requestDto);
+            return memo.getId();
+        }else{
+            throw new IllegalArgumentException("선택한 메모는 존재하지않습니다.");
+        }
+    }
+    //삭제 기능구현
+    @DeleteMapping("/memos/{id}")
+    public Long deleteMemo(@PathVariable Long id){
+        //해당 메모가 존재하는지 확인
+        if(memoList.containsKey(id)){
+            memoList.remove(id);
+            return id;
+        }else{
+            throw new IllegalArgumentException("선택한 메모는 존재하지 않습니다.");
+        }
+    }
 }
