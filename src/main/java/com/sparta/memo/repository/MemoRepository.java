@@ -9,4 +9,5 @@ public interface MemoRepository extends JpaRepository<Memo, Long> {
     List<Memo> findAllByOrderByModifiedAtDesc();
 //    //유저네임 입력하여 조회기능 추가
 //    List<Memo> findAllByUsername(String username);
+    List<Memo> findAllByContentsContainsOrderByModifiedAtDesc(String keyword);
 }
